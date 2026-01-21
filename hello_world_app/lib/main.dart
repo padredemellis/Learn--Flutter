@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false, //con esto quito la etiqueta del modo de desarrollo
+    return  MaterialApp(//con esto quito la etiqueta del modo de desarrollo
+      debugShowCheckedModeBanner: false,
+       theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.yellowAccent
+       ),
       home: CounterScreen());
   }
 }
