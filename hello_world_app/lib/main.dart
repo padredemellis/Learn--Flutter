@@ -10,8 +10,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Text('Hola mundo'),
-        
+      home: Scaffold(  // ← Estructura de pantalla
+        appBar: AppBar(  // ← Barra superior
+          title: Text('Dachi te amo'),
+          backgroundColor: Colors.purple,
+        ),
+        body: Center(  // ← Centra el contenido
+          child:  Text(
+            'Hola Dachi!',
+            style: TextStyle(fontSize: 24),  // ← Tamaño de letra
+          ),
+        ),
+      ),
     );
   }
 }
