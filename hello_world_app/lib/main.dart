@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world_app/presentation/screens/counter/counter_screen.dart';
+import 'package:hello_world_app/presentation/screens/counter/counter_functios_screen.dart';
+// import 'package:hello_world_app/presentation/screens/counter/counter_screen.dart';
 /*
 flutter/material.dart es una librería que contiene todos los widgets (botones, textos, colores, etc.) con el estilo de Material Design (el diseño de Google/Android).
 */
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.yellowAccent
        ),
-      home: CounterScreen());
+      home: const CounterFunctionScreen());
   }
 }
