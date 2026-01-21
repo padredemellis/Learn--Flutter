@@ -1,0 +1,1 @@
+Es un widget que abarca toda la pantalla y adicoinalmente tiene un Scaffold
