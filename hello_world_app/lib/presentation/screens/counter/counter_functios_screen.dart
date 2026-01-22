@@ -13,15 +13,17 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //home es la raiz de la app, scaffold es el esqueleto/estructura de la pantalla(cuerpo,cabeza,pie)
       appBar: AppBar(
         title: const Text('Counter Functions'),
         actions: [
-          IconButton(icon: const Icon(Icons.refresh_rounded), onPressed: () {
-            setState((){
-              clickCounter = 0;
-            })
-          }),
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            onPressed: () {
+              setState(() {
+                clickCounter = 0;
+              });
+            },
+          ),
         ],
       ),
       body: Center(
@@ -30,10 +32,7 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
           children: [
             Text(
               '$clickCounter',
-              style: const TextStyle(
-                fontSize: 160,
-                fontWeight: FontWeight.w100,
-              ),
+              style: const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
             ),
             Text(
               'Click${clickCounter == 1 ? '' : 's'}',
@@ -45,25 +44,51 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          
-          FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            clickCounter++;
-          });
-        },
-        child: const Icon(Icons.plus_one),
+          // Pasamos la lógica como una función anónima
+          CustomButton(
+            icon: Icons.refresh_outlined,
+            onPressed: () {
+              setState(() => clickCounter = 0);
+            },
+          ),
+          const SizedBox(height: 15),
+          CustomButton(
+            icon: Icons.exposure_minus_1_outlined,
+            onPressed: () {
+              if (clickCounter == 0) return; // Evita números negativos
+              setState(() => clickCounter--);
+            },
+          ),
+          const SizedBox(height: 15),
+          CustomButton(
+            icon: Icons.plus_one,
+            onPressed: () {
+              setState(() => clickCounter++);
+            },
+          ),
+        ],
       ),
-      SizedBox(height: 15),
-        FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            clickCounter--;
-          });
-        },
-        child: const Icon(Icons.exposure_minus_1_outlined),
-      ),],
-      )
+    );
+  }
+}
+
+// Widget personalizado
+class CustomButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onPressed; // Recibe la acción a realizar
+
+  const CustomButton({
+    super.key,
+    required this.icon,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      shape: const StadiumBorder(),
+      onPressed: onPressed, // Asigna la acción
+      child: Icon(icon),    // Usa el icono recibido
     );
   }
 }
