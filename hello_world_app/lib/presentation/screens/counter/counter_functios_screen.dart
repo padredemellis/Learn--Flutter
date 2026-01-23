@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math'; // Necesario para generar colores aleatorios
 
 class CounterFunctionScreen extends StatefulWidget {
   const CounterFunctionScreen({super.key});
@@ -9,18 +10,28 @@ class CounterFunctionScreen extends StatefulWidget {
 
 class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
   int clickCounter = 0;
+  // 1. Nueva variable para el color de fondo
+  Color backgroundColor = Colors.white;
+
+  // 2. Función para cambiar el color (la llamaremos en cada acción)
+  void _updateBackgroundColor() {
+    backgroundColor = Color((Random().nextDouble() * 0xFFFFFF).toInt()).withValues(alpha: 1.0);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // 3. Aplicamos el color al Scaffold
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Counter Functions'),
+        title: const Text('Un contador cool'),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh_rounded),
             onPressed: () {
               setState(() {
                 clickCounter = 0;
+                _updateBackgroundColor(); // Cambia color al reiniciar
               });
             },
           ),
@@ -44,26 +55,34 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Pasamos la lógica como una función anónima
           CustomButton(
             icon: Icons.refresh_outlined,
             onPressed: () {
-              setState(() => clickCounter = 0);
+              setState(() {
+                clickCounter = 0;
+                _updateBackgroundColor();
+              });
             },
           ),
           const SizedBox(height: 15),
           CustomButton(
             icon: Icons.exposure_minus_1_outlined,
             onPressed: () {
-              if (clickCounter == 0) return; // Evita números negativos
-              setState(() => clickCounter--);
+              if (clickCounter == 0) return;
+              setState(() {
+                clickCounter--;
+                _updateBackgroundColor(); // Cambia color al restar
+              });
             },
           ),
           const SizedBox(height: 15),
           CustomButton(
             icon: Icons.plus_one,
             onPressed: () {
-              setState(() => clickCounter++);
+              setState(() {
+                clickCounter++;
+                _updateBackgroundColor(); // Cambia color al sumar
+              });
             },
           ),
         ],
@@ -72,10 +91,10 @@ class _CounterFunctionScreenState extends State<CounterFunctionScreen> {
   }
 }
 
-// Widget personalizado
+// Widget personalizado (se mantiene igual)
 class CustomButton extends StatelessWidget {
   final IconData icon;
-  final VoidCallback? onPressed; // Recibe la acción a realizar
+  final VoidCallback? onPressed;
 
   const CustomButton({
     super.key,
@@ -87,8 +106,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       shape: const StadiumBorder(),
-      onPressed: onPressed, // Asigna la acción
-      child: Icon(icon),    // Usa el icono recibido
+      onPressed: onPressed,
+      child: Icon(icon),
     );
   }
 }
