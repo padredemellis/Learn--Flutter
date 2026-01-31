@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
 
 /*
 Aquí creamos una pantalla para nuestro chat
@@ -28,8 +29,6 @@ class ChatScreen extends StatelessWidget {
 }
 
 class _ChatView extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,12 +40,14 @@ class _ChatView extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 100,
                 itemBuilder: (context, index) {
-                  return const MyMessageBubble();
+                  return (index % 2 == 0) // como es una lista de indices va a ir alternando entre mis mensajes y los de ella
+                      ? const MyMessageBubble()
+                      : const MyMessageBubble();
                 },
               ),
             ),
-
-            Text('CreandoAlgoNuevo'),
+            ///Caja de texto de mensajes
+            MessageFieldBox(),
           ],
         ),
       ),

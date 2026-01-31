@@ -18,7 +18,14 @@ class MyMessageBubble extends StatelessWidget {
           child: Padding( // con esto dejamos espacio entre el texto y los bordes
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), 
             child: Text(
-              'El Camino ha ido muy lejos',
+              '''El Camino sigue y sigue
+                  desde la puerta.
+                  El Camino ha ido muy lejos,
+                  y si es posible he de seguirlo
+                  recorriéndolo con pie decidido (fatigado)
+                  hasta llegar a un camino más ancho
+                  donde se encuentran senderos y cursos.
+                  ¿Y de ahí a dónde iré? No podría decirlo.''',
               style: TextStyle(color: Colors.white), // hacemos el texto tenga un color blanco
             ),
           ),
